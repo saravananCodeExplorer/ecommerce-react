@@ -1,0 +1,30 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { CartProvider } from "./context/CartContext.jsx";
+import ProductList from "./components/ProductList/ProductList";
+import Cart from "./components/Cart/Cart.jsx"; 
+import Header from "./components/Header/Header";
+import Hero from "./components/Hero/Hero";
+import About from "./components/About/About";
+import Services from "./components/Services/Services";
+import Footer from "./components/Footer/Footer";
+
+function App() {
+  return (
+    <CartProvider>
+      <Router>
+        <Header />
+        <Hero />
+        <Routes>
+          <Route path="/" element={<ProductList />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
+        <Footer />
+      </Router>
+      </CartProvider>
+   
+  );
+}
+
+export default App;
