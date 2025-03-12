@@ -1,9 +1,10 @@
 import React from "react";
-import { useCart } from "../../context/CartContext.jsx"; 
-import "./Cart.css";  // Import the CSS file
+import { Link } from "react-router-dom";
+import { useCart } from "../../context/CartContext.jsx";
+import "./Cart.css";
 
 const Cart = () => {
-  const { cart, removeFromCart, clearCart } = useCart(); 
+  const { cart, removeFromCart, clearCart } = useCart();
 
   return (
     <div className="cart-container">
@@ -11,21 +12,30 @@ const Cart = () => {
       {cart.length === 0 ? (
         <p className="empty-cart">Your cart is empty.</p>
       ) : (
-        <div>
+        <div className="cart-content">
           <ul className="cart-items">
             {cart.map((item) => (
               <li key={item.id} className="cart-item">
-                <img src={item.image} alt={item.name} className="cart-image" />
-                <div>
+                <img src={`http://localhost:5000${item.image}`} alt={item.name} className="cart-image" />
+                <div className="item-details">
                   <h3>{item.name}</h3>
-                  <p>Price: ₹{item.price}</p>
-                  <p>Quantity: {item.quantity}</p>
+                  <p className="item-price">Price: ₹{item.price}</p>
+                  <p className="item-quantity">Quantity: {item.quantity}</p>
                 </div>
-                <button className="remove-btn" onClick={() => removeFromCart(item.id)}>Remove</button>
+                <button className="remove-btn" onClick={() => removeFromCart(item.id)}>
+                  Remove
+                </button>
               </li>
             ))}
           </ul>
-          <button className="clear-cart-btn" onClick={clearCart}>Clear Cart</button>
+          <div className="cart-actions">
+            <button className="clear-cart-btn" onClick={clearCart}>
+              Clear Cart
+            </button>
+            <Link to="/payment" className="payment-link">
+              Payment Details
+            </Link>
+          </div>
         </div>
       )}
     </div>

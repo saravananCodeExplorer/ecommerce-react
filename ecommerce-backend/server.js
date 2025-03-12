@@ -26,6 +26,32 @@ db.connect((err) => {
   }
 });
 
+// Customer Signup Endpoint
+app.post("/customers/signup", async (req, res) => {
+  const { name, email, password } = req.body;
+
+  // Validate required fields
+  if (!name || !email || !password) {
+    return res.status(400).json({ success: false, message: "All fields are required." });
+  }
+
+  try {
+    // Hash password before storing
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const sql = "INSERT INTO customers (name, email, password) VALUES (?, ?, ?)";
+    db.query(sql, [name, email, hashedPassword], (err, result) => {
+      if (err) {
+        console.error("Error inserting customer:", err);
+        return res.status(500).json({ success: false, message: "Database error." });
+      }
+      res.json({ success: true, id: result.insertId });
+    });
+  } catch (error) {
+    console.error("Signup error:", error);
+    res.status(500).json({ success: false, message: "Signup failed." });
+  }
+});
 // Multer Storage Setup
 const storage = multer.diskStorage({
   destination: "uploads/", // Image save location

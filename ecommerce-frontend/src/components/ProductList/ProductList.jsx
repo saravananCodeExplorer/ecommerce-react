@@ -19,7 +19,8 @@ const ProductList = () => {
       <div className="products-grid">
         {products.map(product => (
           <div key={product.id} className="product-card">
-            <img src={product.image} alt={product.name} className="product-image" />
+         <img src={`http://localhost:5000${product.image}`} alt={product.name} className="product-image" />
+
             <div className="product-info">
               <h3>{product.name}</h3>
               <p className="price">₹{product.price}</p>
