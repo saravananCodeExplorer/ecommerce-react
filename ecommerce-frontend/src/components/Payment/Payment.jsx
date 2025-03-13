@@ -35,7 +35,7 @@ const Payment = () => {
       };
 
       // Call backend payment endpoint (simulate payment processing)
-      const response = await axios.post("http://localhost:5000/payment", paymentPayload);
+      const response = await axios.post("http://localhost:5000/api/payments", paymentPayload);
       
       if (response.data.success) {
         setSuccessMessage("Payment Successful! Thank you for shopping.");

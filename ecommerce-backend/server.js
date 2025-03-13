@@ -25,33 +25,45 @@ db.connect((err) => {
     console.log("Connected to MySQL Database");
   }
 });
+// Payment API Endpoint
+app.post("/api/payments", (req, res) => {
+  const { name, cardNumber, expiry, cvv, totalAmount } = req.body;
+  
+  if (!name || !cardNumber || !expiry || !cvv || !totalAmount) {
+    return res.status(400).json({ success: false, error: "All fields are required" });
+  }
+  
+  const orderId = Math.floor(Math.random() * 1000000);
+  const transactionId = `TXN${Date.now()}`;
 
-// Customer Signup Endpoint
-app.post("/customers/signup", async (req, res) => {
+  const sql = `INSERT INTO payment_details (order_id, total_amount, cardholder_name, payment_method, payment_status, transaction_id) VALUES (?, ?, ?, ?, ?, ?)`;
+  
+  db.query(sql, [orderId, totalAmount, name, "Card", "Success", transactionId], (err) => {
+    if (err) {
+      console.error("Payment error:", err);
+      return res.status(500).json({ success: false, error: "Database error" });
+    }
+    res.json({ success: true, message: "Payment successful", transactionId });
+  });
+});
+
+
+
+// 🟢 Simple Customer Signup Endpoint
+app.post("/customers/signup", (req, res) => {
   const { name, email, password } = req.body;
 
-  // Validate required fields
-  if (!name || !email || !password) {
-    return res.status(400).json({ success: false, message: "All fields are required." });
-  }
-
-  try {
-    // Hash password before storing
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const sql = "INSERT INTO customers (name, email, password) VALUES (?, ?, ?)";
-    db.query(sql, [name, email, hashedPassword], (err, result) => {
-      if (err) {
-        console.error("Error inserting customer:", err);
-        return res.status(500).json({ success: false, message: "Database error." });
-      }
-      res.json({ success: true, id: result.insertId });
-    });
-  } catch (error) {
-    console.error("Signup error:", error);
-    res.status(500).json({ success: false, message: "Signup failed." });
-  }
+  // Insert customer into the database
+  const sql = "INSERT INTO customers (name, email, password) VALUES (?, ?, ?)";
+  db.query(sql, [name, email, password], (err, result) => {
+    if (err) {
+      console.error("❌ Error inserting customer:", err);
+      return res.status(500).json({ success: false, message: "Database error." });
+    }
+    res.status(201).json({ success: true, message: "Signup successful", id: result.insertId });
+  });
 });
+
 // Multer Storage Setup
 const storage = multer.diskStorage({
   destination: "uploads/", // Image save location

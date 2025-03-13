@@ -8,7 +8,7 @@ const Hero = () => {
       <div className="hero-content">
         <h1>Discover the Best Deals</h1>
         <p>Shop the latest trends at unbeatable prices.</p>
-        <Link to="/productlist" className="btn">Shop Now</Link>
+        <Link to="/customer" className="btn">Shop Now</Link>
       </div>
     </section>
   );

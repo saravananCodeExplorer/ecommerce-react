@@ -1,78 +1,53 @@
-/* About Page Container */
+/* About Page Styles */
 .about-container {
-    text-align: center;
-    padding: 20px;
-    background: #f8f9fa;
-  }
-  
-  /* About Banner */
-  .about-banner {
-    background: url("/assets/about-banner.jpg") center/cover no-repeat;
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 2rem;
-    font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  }
-  
-  /* About Content */
-  .about-content {
-    max-width: 900px;
-    margin: 30px auto;
-    text-align: left;
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* About Text Sections */
-  .about-text {
-    margin-bottom: 20px;
-  }
-  
-  .about-text h2 {
-    color: #333;
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-  
-  .about-text p {
-    font-size: 1.1rem;
-    color: #555;
-  }
-  
-  .about-text ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .about-text ul li {
-    font-size: 1.1rem;
-    color: #333;
-    padding: 5px 0;
-  }
-  
-  /* Responsive Design */
-  @media screen and (max-width: 768px) {
-    .about-banner {
-      font-size: 1.5rem;
-      height: 150px;
-    }
-  
-    .about-content {
-      padding: 15px;
-    }
-  
-    .about-text h2 {
-      font-size: 1.3rem;
-    }
-  
-    .about-text p, .about-text ul li {
-      font-size: 1rem;
-    }
-  }
-  
+  text-align: center;
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.about-banner {
+  background-color: #222;
+  color: #fff;
+  padding: 50px 20px;
+  font-size: 24px;
+}
+
+.about-content {
+  margin-top: 20px;
+}
+
+.about-text {
+  background: #f8f8f8;
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.about-text h2 {
+  color: #f8b400;
+  margin-bottom: 10px;
+}
+
+.about-text p {
+  font-size: 16px;
+  color: #333;
+}
+
+.about-text ul {
+  list-style: none;
+  padding: 0;
+}
+
+.about-text ul li {
+  font-size: 16px;
+  padding: 5px 0;
+  color: #555;
+}
+
+.about-text ul li::before {
+  content: "✔ ";
+  color: #f8b400;
+}
