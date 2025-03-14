@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2025 at 07:20 PM
+-- Generation Time: Mar 14, 2025 at 10:45 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -60,9 +60,9 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `name`, `email`, `password`, `created_at`, `updated_at`) VALUES
-(1, 'Kadal selvam', 'kadalselvam6@gmail.com', '111111111', '2025-03-12 17:55:23', '2025-03-12 17:55:23'),
-(3, 'saravana', 'saravanansekar434@gmail.com', '1111111', '2025-03-12 17:59:50', '2025-03-12 17:59:50'),
-(4, 'ganesh', 'ganesh@gmail.com', '4545454545', '2025-03-12 18:06:35', '2025-03-12 18:06:35');
+(4, 'ganesh', 'ganesh@gmail.com', '4545454545', '2025-03-12 18:06:35', '2025-03-12 18:06:35'),
+(5, 'kamal', 'kamal@gmail.com', 'kamal123', '2025-03-13 11:31:09', '2025-03-13 11:31:09'),
+(7, 'Kadal selvam', 'kadalselvam6@gmail.com', '12345', '2025-03-14 09:44:12', '2025-03-14 09:44:12');
 
 -- --------------------------------------------------------
 
@@ -87,7 +87,8 @@ CREATE TABLE `payment_details` (
 --
 
 INSERT INTO `payment_details` (`id`, `order_id`, `total_amount`, `cardholder_name`, `payment_method`, `payment_status`, `transaction_id`, `created_at`, `updated_at`) VALUES
-(1, 97288, 19999.00, 'saravanan', 'Card', 'Success', 'TXN1741803179959', '2025-03-12 18:12:59', '2025-03-12 18:12:59');
+(1, 97288, 19999.00, 'saravanan', 'Card', 'Success', 'TXN1741803179959', '2025-03-12 18:12:59', '2025-03-12 18:12:59'),
+(2, 176271, 19999.00, 'kadal', 'Card', 'Success', 'TXN1741945479546', '2025-03-14 09:44:39', '2025-03-14 09:44:39');
 
 -- --------------------------------------------------------
 
@@ -115,7 +116,8 @@ INSERT INTO `products` (`id`, `name`, `price`, `image`) VALUES
 (17, 'Galaxy', 8000.00, '/uploads/1741782163833.webp'),
 (18, 'asus-laptop', 40999.00, '/uploads/1741782202305.webp'),
 (19, 'Lenovo IdeaPad', 28888.00, '/uploads/1741782251728.jpg'),
-(20, 'real Me', 22999.00, '/uploads/1741782855066.webp');
+(20, 'real Me', 22999.00, '/uploads/1741782855066.webp'),
+(21, 'boAt Bassheads', 450.00, '/uploads/1741945409296.jpg');
 
 --
 -- Indexes for dumped tables
@@ -161,19 +163,19 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `payment_details`
 --
 ALTER TABLE `payment_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
