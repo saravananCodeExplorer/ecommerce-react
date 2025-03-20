@@ -11,6 +11,9 @@ import About from "./components/About/About";
 import Services from "./components/Services/Services";
 import Footer from "./components/Footer/Footer";
 import CustomerSignup from "./components/CustomerSignup/CustomerSignup.jsx";
+import CustomerLogin from "./components/CustomerSignup/CustomerLogin.jsx";
+import AdminLogin from "./components/Admin/AdminLogin.jsx";
+
 
 function App() {
   return (
@@ -25,8 +28,11 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/payment" element={<Payment />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/adminlogin" element={<AdminLogin />} />
+          {/* <Route path="/admindashboard" element={<Admin />} /> */}
           <Route path="/customer" element={<CustomerSignup />} />
+          <Route path="/customerlogin" element={<CustomerLogin/>}/>
+       
         </Routes>
         <Footer />
       </Router>

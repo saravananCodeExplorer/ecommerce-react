@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./CustomerSignup.css"; // Style file
+import { Link } from "react-router-dom";
 
 const CustomerSignup = () => {
   const [customer, setCustomer] = useState({ name: "", email: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // Update form fields
+  // Handle input changes
   const handleChange = (e) => {
     setCustomer({ ...customer, [e.target.name]: e.target.value });
   };
@@ -39,6 +40,8 @@ const CustomerSignup = () => {
         <input type="email" name="email" placeholder="Email Address" value={customer.email} onChange={handleChange} required />
         <input type="password" name="password" placeholder="Password" value={customer.password} onChange={handleChange} required />
         <button type="submit">Signup</button>
+        <Link to="/customerlogin" className="login-link">Login</Link>
+
       </form>
     </div>
   );

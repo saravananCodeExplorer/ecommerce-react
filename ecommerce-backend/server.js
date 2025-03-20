@@ -1,14 +1,25 @@
 const express = require("express");
 const mysql = require("mysql2");
 const cors = require("cors");
-const multer = require("multer"); // Import Multer
-const path = require("path"); // Import Path for file extensions
+const multer = require("multer"); // Import Multer for file uploads
+const path = require("path"); // Import Path for handling file extensions
 require("dotenv").config();
+const bcrypt = require("bcrypt"); // Import Bcrypt for password hashing
+const jwt = require("jsonwebtoken"); // Import JWT for authentication
 
-const app = express();
+
+
+
+const app = express();  
 app.use(cors());
 app.use(express.json());
 app.use("/uploads", express.static("uploads")); // Serve images statically
+
+
+app.get('/',(req,res)=>{
+  return res.json("From backend side");
+})
+
 
 // MySQL Database Connection
 const db = mysql.createConnection({
@@ -25,6 +36,29 @@ db.connect((err) => {
     console.log("Connected to MySQL Database");
   }
 });
+
+
+
+// 🔹 Admin Login Route
+app.post("/admin/login", (req, res) => {
+  const { email, password } = req.body;
+
+  db.query("SELECT * FROM admins WHERE email = ?", [email], async (err, results) => {
+    if (err) return res.status(500).json({ success: false, message: "Database error" });
+    if (results.length === 0) return res.status(401).json({ success: false, message: "Invalid credentials" });
+
+    const admin = results[0];
+
+    // Compare hashed password
+    const isMatch = await bcrypt.compare(password, admin.password);
+    if (!isMatch) return res.status(401).json({ success: false, message: "Invalid credentials" });
+
+    const token = jwt.sign({ id: admin.id, email: admin.email }, "secret_key", { expiresIn: "1h" });
+
+    res.json({ success: true, message: "Login successful", token });
+  });
+});
+
 // Payment API Endpoint
 app.post("/api/payments", (req, res) => {
   const { name, cardNumber, expiry, cvv, totalAmount } = req.body;
@@ -50,17 +84,56 @@ app.post("/api/payments", (req, res) => {
 
 
 // 🟢 Simple Customer Signup Endpoint
-app.post("/customers/signup", (req, res) => {
+app.post("/customers/signup", async (req, res) => {
   const { name, email, password } = req.body;
 
-  // Insert customer into the database
-  const sql = "INSERT INTO customers (name, email, password) VALUES (?, ?, ?)";
-  db.query(sql, [name, email, password], (err, result) => {
-    if (err) {
-      console.error("❌ Error inserting customer:", err);
-      return res.status(500).json({ success: false, message: "Database error." });
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10); // Hash password
+
+    const sql = "INSERT INTO customers (name, email, password) VALUES (?, ?, ?)";
+    db.query(sql, [name, email, hashedPassword], (err, result) => {
+      if (err) {
+        console.error("❌ Error inserting customer:", err);
+        return res.status(500).json({ success: false, message: "Database error." });
+      }
+      res.status(201).json({ success: true, message: "Signup successful", id: result.insertId });
+    });
+  } catch (error) {
+    console.error("❌ Password hashing error:", error);
+    res.status(500).json({ success: false, message: "Error processing signup." });
+  }
+});
+
+
+app.post("/customers/login", (req, res) => {
+  const { email, password } = req.body;
+
+  const sql = "SELECT * FROM customers WHERE email = ?";
+  db.query(sql, [email], async (err, results) => {
+    if (err) return res.json({ success: false, message: "Database error" });
+
+    if (results.length === 0) {
+      return res.json({ success: false, message: "Invalid email or password" });
     }
-    res.status(201).json({ success: true, message: "Signup successful", id: result.insertId });
+
+    const customer = results[0];
+
+    // If password is plain text, update it to hashed
+    if (!customer.password.startsWith("$2b$")) {
+      const hashedPassword = await bcrypt.hash(customer.password, 10);
+      db.query("UPDATE customers SET password = ? WHERE id = ?", [hashedPassword, customer.id]);
+    }
+
+    // Compare password with hashed password
+    const isMatch = await bcrypt.compare(password, customer.password);
+    if (!isMatch) {
+      return res.json({ success: false, message: "Invalid email or password" });
+    }
+
+    // Generate JWT token
+    const token = jwt.sign({ id: customer.id, email: customer.email }, "secret_key", { expiresIn: "1h" });
+
+    res.json({ success: true, message: "Login successful", token });
   });
 });
 
