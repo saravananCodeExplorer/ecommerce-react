@@ -29,7 +29,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/adminlogin" element={<AdminLogin />} />
-          {/* <Route path="/admindashboard" element={<Admin />} /> */}
+          <Route path="/admindashboard" element={<Admin />} />
           <Route path="/customer" element={<CustomerSignup />} />
           <Route path="/customerlogin" element={<CustomerLogin/>}/>
        

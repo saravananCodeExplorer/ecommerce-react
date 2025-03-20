@@ -1,9 +1,9 @@
-const express = require("express");
-const mysql = require("mysql2");
-const cors = require("cors");
+const express = require("express"); // Imports the Express.js framework to create a web server.
+const mysql = require("mysql2");//Imports the MySQL2 library to connect and interact with a MySQL database
+const cors = require("cors");  //access all node api's in our react app
 const multer = require("multer"); // Import Multer for file uploads
 const path = require("path"); // Import Path for handling file extensions
-require("dotenv").config();
+require("dotenv").config();  // environment variables from a .env file for configuration.
 const bcrypt = require("bcrypt"); // Import Bcrypt for password hashing
 const jwt = require("jsonwebtoken"); // Import JWT for authentication
 
@@ -83,7 +83,7 @@ app.post("/api/payments", (req, res) => {
 
 
 
-// 🟢 Simple Customer Signup Endpoint
+//  Customer Signup 
 app.post("/customers/signup", async (req, res) => {
   const { name, email, password } = req.body;
 

@@ -27,7 +27,7 @@ const Header = () => {
           <li><Link to="/cart" onClick={() => setMenuOpen(false)}>Cart ({cart.length})</Link></li>
           <li><Link to="/adminlogin" onClick={() => setMenuOpen(false)}>Admin</Link></li>
           <li><Link to="/Customer" onClick={() => setMenuOpen(false)}>Customer</Link></li>
-          {/* <li><Link to="/adminlogin" onClick={() => setMenuOpen(false)}>adminlogin</Link></li> */}
+       
         
      
         </ul>

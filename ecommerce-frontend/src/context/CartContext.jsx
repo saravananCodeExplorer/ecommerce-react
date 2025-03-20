@@ -5,7 +5,7 @@ const CartContext = createContext(); // ✅ Creates a Cart Context
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
-  // ✅ Function to Add Product to Cart
+  // Function to Add Product to Cart
   const addToCart = (product) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === product.id);
@@ -19,7 +19,7 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  // ✅ Function to Remove Product from Cart
+  // Function to Remove Product from Cart
   const removeFromCart = (id) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
