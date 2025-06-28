@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 20, 2025 at 11:33 AM
+-- Generation Time: Jun 28, 2025 at 11:11 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.4.18
 
@@ -67,7 +67,9 @@ INSERT INTO `customers` (`id`, `name`, `email`, `password`, `created_at`, `updat
 (9, 'rajesh', 'rajesh@gmail.com', 'rajesh123', '2025-03-15 04:24:43', '2025-03-15 04:24:43'),
 (11, 'suresh', 'suresh@gmail.com', '12345', '2025-03-15 07:13:36', '2025-03-15 07:13:36'),
 (12, 'priya', 'priya@gmail.com', 'priya123', '2025-03-20 08:44:21', '2025-03-20 08:44:21'),
-(20, 'vimal', 'vimal@gmail.com', '$2b$10$1bXRyrkGaOn1cT1VwYgPOeR4QxtYniX1S58iqNZQQeNUAZXO3ghui', '2025-03-20 09:26:12', '2025-03-20 09:26:12');
+(20, 'vimal', 'vimal@gmail.com', '$2b$10$1bXRyrkGaOn1cT1VwYgPOeR4QxtYniX1S58iqNZQQeNUAZXO3ghui', '2025-03-20 09:26:12', '2025-03-20 09:26:12'),
+(22, 'prathosh', 'prathosh@gmail.com', '$2b$10$JFjynZwPDXf.7hjQXGX9j.yMHzlw7fIGYXEB5d4KcYnfNXD6SroNu', '2025-06-12 11:03:40', '2025-06-12 11:03:40'),
+(23, 'saran', 'saran@gmail.com', '$2b$10$jB8LRZWg409pHBjKLL4xSeOj66bG2/ccHhNTTFcT3REDMtmwwNjeW', '2025-06-28 08:57:24', '2025-06-28 08:57:24');
 
 -- --------------------------------------------------------
 
@@ -96,7 +98,9 @@ INSERT INTO `payment_details` (`id`, `order_id`, `total_amount`, `cardholder_nam
 (2, 176271, '19999.00', 'kadal', 'Card', 'Success', 'TXN1741945479546', '2025-03-14 09:44:39', '2025-03-14 09:44:39'),
 (3, 490758, '299.00', 'saravanan', 'Card', 'Success', 'TXN1741956002155', '2025-03-14 12:40:02', '2025-03-14 12:40:02'),
 (4, 668542, '19999.00', 'kishore', 'Card', 'Success', 'TXN1742385241473', '2025-03-19 11:54:01', '2025-03-19 11:54:01'),
-(5, 403521, '299.00', 'vimal', 'Card', 'Success', 'TXN1742462832921', '2025-03-20 09:27:12', '2025-03-20 09:27:12');
+(5, 403521, '299.00', 'vimal', 'Card', 'Success', 'TXN1742462832921', '2025-03-20 09:27:12', '2025-03-20 09:27:12'),
+(6, 107405, '887.00', 'prathosh', 'Card', 'Success', 'TXN1749726341831', '2025-06-12 11:05:41', '2025-06-12 11:05:41'),
+(7, 367165, '488.00', 'fahath', 'Card', 'Success', 'TXN1751101098681', '2025-06-28 08:58:18', '2025-06-28 08:58:18');
 
 -- --------------------------------------------------------
 
@@ -116,7 +120,6 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `price`, `image`) VALUES
-(8, 'boAt Bassheads', '400.00', '/uploads/1741779926673.webp'),
 (10, 'JBL Flip 5 Wireless', '599.00', '/uploads/1741781783966.webp'),
 (11, 'boAt Airdopes', '488.00', '/uploads/1741781825014.jpg'),
 (15, 'HP Laptop 15s', '19999.00', '/uploads/1741781925972.jpg'),
@@ -173,19 +176,19 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `payment_details`
 --
 ALTER TABLE `payment_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
